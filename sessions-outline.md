@@ -1,13 +1,12 @@
-# Jenkins Training Plan
+# Jenkins Training outline
 
 Two 3-hour masterclasses (6 hours total) with one assignment between sessions and a capstone after.
 
 **Audience:** Linux, Git, GitHub and GitHub Actions knowledge only. No prior Jenkins experience.
-**Approach:** Map Jenkins concepts to GitHub Actions throughout (workflow = Jenkinsfile, runner = agent, secrets = credentials, marketplace = plugins).
 
 ---
 
-## Masterclass 1: Core Jenkins and Freestyle (3 hrs)
+## Day 1: Core Jenkins and Freestyle (3 hrs)
 
 | Time | Topic |
 |---|---|
@@ -33,7 +32,7 @@ Create a freestyle job for a private repo using a stored credential. The job mus
 
 ---
 
-## Masterclass 2: Pipelines, Agents, Admin (3 hrs)
+## Day 2: Pipelines, Agents, Admin (3 hrs)
 
 | Time | Topic |
 |---|---|
@@ -58,7 +57,7 @@ Build a multibranch pipeline inside a folder that:
 
 ---
 
-## Trainer Checklist
+## Topic Checklist
 
 ### Masterclass 1
 
@@ -93,16 +92,7 @@ Build a multibranch pipeline inside a folder that:
 - [ ] Scopes (system vs global) and domains
 - [ ] Binding in a job and log masking
 - [ ] Private repo checkout
-
-**Wrap-up**
-- [ ] Recap
-- [ ] Assignment 1 briefed
-
-### Masterclass 2
-
-**Review**
-- [ ] Assignment 1 feedback
-
+      
 **Declarative pipeline**
 - [ ] Why pipeline as code
 - [ ] Jenkinsfile structure: `pipeline`, `agent`, `stages`, `steps`
@@ -149,8 +139,3 @@ Build a multibranch pipeline inside a folder that:
 - [ ] Assignment 1 and capstone rubrics ready
 
 ---
-
-## Notes
-
-- **Tightest spot:** Masterclass 2, agents plus admin. If it runs long, cut the admin block and ship it as a handout.
-- **Trimmed from the longer plan:** email notifications and extra post-build actions are optional homework. Matrix, multibranch and folders are demo-only, so the capstone carries the hands-on practice.
