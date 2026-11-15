@@ -1,27 +1,36 @@
 
 #!/bin/sh
 
-# Greeting
-echo "Hello Rakesh"
-
-# List of people
-GreetPeople="Rakesh,Rohit,Mahesh,Bhanushali,Gautam,Om"
-
-echo "People: $GreetPeople"
-
-# Convert comma-separated names into individual names
-echo "$GreetPeople" | tr ',' '\n' | while IFS= read -r name
-do
-    [ -z "$name" ] || echo "Hello $name"
-done
-
-# Cricket news placeholder
+echo "Hello Rakesh! Today is $(date)"
 echo ""
-echo "Fetching latest cricket news..."
+echo "========== TOP 5 CRICBUZZ NEWS =========="
 
-# Wait
-echo ""
-echo "Sleeping for 120 seconds"
-sleep 120
+API="https://api.opendata-api.com/en/cricbuzz-cricket/news-list.html"
 
-echo "Woke up now"
+RESPONSE=$(mktemp)
+trap 'rm -f "$RESPONSE"' EXIT
+
+HTTP_CODE=$(curl -sSL --max-time 30 \
+    -o "$RESPONSE" \
+    -w "%{http_code}" \
+    "$API")
+
+if [ "$HTTP_CODE" != "200" ]; then
+    echo "Unable to fetch news. HTTP: $HTTP_CODE"
+    exit 1
+fi
+
+if ! command -v jq >/dev/null 2>&1; then
+    echo "jq is required. Please install jq."
+    exit 1
+fi
+
+jq -r '
+.storyList
+| map(select(.story != null))
+| .[:5]
+| to_entries[]
+| "\(.key + 1). \(.value.story.hline)"
+' "$RESPONSE"
+
+echo "========================================="
